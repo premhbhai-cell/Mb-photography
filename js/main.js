@@ -1,0 +1,20 @@
+(function(){
+var h=document.querySelector('header');
+function s(){h.classList.toggle('solid',scrollY>10)}s();addEventListener('scroll',s);
+var b=document.querySelector('.burger'),m=document.querySelector('.menu');
+b.onclick=function(){m.classList.toggle('open');b.textContent=m.classList.contains('open')?'✕':'☰'};
+var sl=document.querySelectorAll('.slide'),i=0;
+if(sl.length>1)setInterval(function(){sl[i].classList.remove('on');i=(i+1)%sl.length;sl[i].classList.add('on')},5500);
+document.documentElement.classList.add('js');
+document.querySelectorAll('.band h2,.rimg,.rtx,.box,.watch a,.faq details,.gr-head,.tag,.cinfo,.two>*,.gal img').forEach(function(e){e.classList.add('rv')});
+document.querySelectorAll('.cards,.cols,.gal,.watch,.rows').forEach(function(g){Array.prototype.forEach.call(g.querySelectorAll('.rv'),function(e,k){e.style.transitionDelay=((k%3)*0.15)+'s'})});
+var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
+document.querySelectorAll('.rv').forEach(function(e){io.observe(e)});
+var lb=document.createElement('div');lb.className='lb';lb.innerHTML='<img alt="">';document.body.appendChild(lb);
+lb.onclick=function(){lb.classList.remove('on')};
+document.querySelectorAll('.gal img').forEach(function(im){im.onclick=function(){lb.firstChild.src=im.src;lb.classList.add('on')}});
+var f=document.getElementById('enq');
+if(f)f.onsubmit=function(e){e.preventDefault();var d=new FormData(f);
+var t='Hello MB Photography,%0AName: '+encodeURIComponent(d.get('name'))+'%0APhone: '+encodeURIComponent(d.get('phone'))+'%0AService: '+encodeURIComponent(d.get('service'))+'%0AEvent Date: '+encodeURIComponent(d.get('date')||'-')+'%0AMessage: '+encodeURIComponent(d.get('msg')||'-');
+window.open('https://wa.me/919826398764?text='+t,'_blank')};
+})();
