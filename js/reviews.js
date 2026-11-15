@@ -18,15 +18,16 @@ var REVIEWS=[
 {n:"Ritu Soni",d:"18 May 2026",t:"Best place"},
 {n:"Karan Thakur",d:"3 May 2026",t:"Wonderful experience from booking to delivery. Will definitely recommend to friends and family."}
 ];
-(function(){
-var root=document.getElementById('greviews');if(!root)return;
+(function(){function __rv(){
+var R=(window.SETTINGS&&Array.isArray(SETTINGS.reviews))?SETTINGS.reviews:REVIEWS,E=function(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;')};
+var root=document.getElementById('greviews');if(!root)return;if(!R.length){root.style.display='none';return}
 var COL=['#1a73e8','#188038','#d93025','#f29900','#9334e6','#e8710a','#129eaf','#a52714'];
 var star='<img src="assets/img/g-star.svg" alt="" width="17" height="17">';
 var stars=star+star+star+star+star;
-root.querySelector('.gr-count').textContent=REVIEWS.length;
+root.querySelector('.gr-count').textContent=R.length;
 var track=root.querySelector('.gr-track');
-track.innerHTML=REVIEWS.map(function(r,i){
-return '<div class="gr-slide"><div class="gr-card"><div class="gr-top"><div class="gr-av" style="background:'+COL[i%COL.length]+'">'+r.n.charAt(0)+'</div><div class="gr-meta"><b>'+r.n+'</b><span>'+r.d+'</span></div><img class="gr-g" src="assets/img/g-icon.svg" alt="Google" width="22" height="22"></div><div class="gr-stars">'+stars+'</div><p>'+r.t+'</p></div></div>';}).join('');
+track.innerHTML=R.map(function(r,i){
+return '<div class="gr-slide"><div class="gr-card"><div class="gr-top"><div class="gr-av" style="background:'+COL[i%COL.length]+'">'+E(String(r.n).charAt(0))+'</div><div class="gr-meta"><b>'+E(r.n)+'</b><span>'+E(r.d)+'</span></div><img class="gr-g" src="assets/img/g-icon.svg" alt="Google" width="22" height="22"></div><div class="gr-stars">'+stars+'</div><p>'+E(r.t)+'</p></div></div>';}).join('');
 var slides=track.children,page=0,per=3,dots=root.querySelector('.gr-dots');
 function calc(){var w=window.innerWidth;per=w<700?1:(w<1000?2:3);}
 function pages(){return Math.max(1,slides.length-per+1)}
@@ -44,4 +45,6 @@ var sx=0;track.addEventListener('touchstart',function(e){sx=e.touches[0].clientX
 track.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)go(page+(dx<0?1:-1))});
 var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(init,150)});
 init();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',__rv);else __rv();
 })();

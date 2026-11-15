@@ -171,3 +171,8 @@ header{animation:fadeDown .9s ease both}
  .js .rv{opacity:1;transform:none;transition:none}
  .slide.on{animation:none}
 }
+
+/* Login button (admin) */
+.menu .cms-login a{background:var(--red);color:#fff!important;padding:9px 24px;border-radius:30px;text-shadow:none;border:2px solid var(--red);font-weight:700}
+.menu .cms-login a:hover,.menu .cms-login a:focus{background:#114358;border-color:#114358;color:#fff!important}
+@media(max-width:760px){.menu li.cms-login{border-bottom:0;padding:12px 0 2px}.menu .cms-login a{display:inline-block;padding:10px 30px}}
